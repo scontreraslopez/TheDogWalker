@@ -16,6 +16,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,18 +26,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import net.iessochoa.sergiocontreras.thedogwalker.R
 import net.iessochoa.sergiocontreras.thedogwalker.data.DogRepository
 import net.iessochoa.sergiocontreras.thedogwalker.model.Dog
+import net.iessochoa.sergiocontreras.thedogwalker.ui.DogWalkerViewModel
 import net.iessochoa.sergiocontreras.thedogwalker.ui.components.StatusIconsRow
 import net.iessochoa.sergiocontreras.thedogwalker.ui.theme.TheDogWalkerTheme
 
 @Composable
 fun DogDetailScreen(
     dog: Dog,
-    onToggleStatus: (String) -> Unit, // Callback para comunicar al ViewModel
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: DogWalkerViewModel = viewModel()
 ) {
+
+    val uiState by viewModel.uiState.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -99,7 +106,7 @@ fun DogDetailScreen(
                 StatusIconsRow(
                     dog = dog,
                     clickable = true,
-                    onToggle = onToggleStatus,
+                    onToggle = {viewModel.onToggleSelected(it) },
                     iconSize = 64.dp // Hacemos los iconos grandes para facilitar el 'tap'
                 )
 
@@ -114,6 +121,7 @@ fun DogDetailScreen(
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 private fun DogDetailScreenPreview() {
@@ -121,8 +129,9 @@ private fun DogDetailScreenPreview() {
     TheDogWalkerTheme() {
         DogDetailScreen(
             dog = previewDog,
-            onToggleStatus =  {}
+            onToggleStatus =  {it}
         )
 
     }
 }
+*/

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheDogWalker</string>
+    <string name="title_dog_detail">Dog Status</string>
 </resources>

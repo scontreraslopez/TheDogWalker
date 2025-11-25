@@ -29,8 +29,7 @@ fun DogWalkerApp() {
         ) }
     ) { innerPadding ->
         DogListScreen(
-            DogRepository.getAllDogs(),
-            {},
+            dogs = DogRepository.getAllDogs(),
             modifier = Modifier.fillMaxSize().padding(innerPadding)
         )
 
