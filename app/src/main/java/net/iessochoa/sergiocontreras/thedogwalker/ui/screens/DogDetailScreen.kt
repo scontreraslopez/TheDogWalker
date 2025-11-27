@@ -36,12 +36,15 @@ import net.iessochoa.sergiocontreras.thedogwalker.ui.theme.TheDogWalkerTheme
 
 @Composable
 fun DogDetailScreen(
-    dog: Dog,
+    //dog: Dog,
     modifier: Modifier = Modifier,
-    viewModel: DogWalkerViewModel = viewModel()
+    viewModel: DogWalkerViewModel = viewModel(),
+    onBack: () -> Unit
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
+    val dog = uiState.selectedDog ?: uiState.dogs.first()
+
 
     Column(
         modifier = modifier

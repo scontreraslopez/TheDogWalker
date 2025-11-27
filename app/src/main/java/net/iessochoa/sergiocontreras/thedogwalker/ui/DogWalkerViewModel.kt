@@ -1,5 +1,6 @@
 package net.iessochoa.sergiocontreras.thedogwalker.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,12 +25,12 @@ class DogWalkerViewModel: ViewModel() {
     fun onToggleSelected(type: String) {
         _uiState.update { currentState ->
 
-            val newDog = currentState.selectedDog
+            var newDog = currentState.selectedDog
 
-            when (type) {
-              "walked" -> newDog!!.copy(isWalked = !newDog.isWalked)
-                "pee" -> newDog!!.copy(hasPeed = !newDog.hasPeed)
-                else -> newDog!!.copy(hasPooped = !newDog.hasPooped)
+            newDog = when (type) {
+              "walk" -> newDog!!.copy(isWalked = true)
+                "pee" -> newDog!!.copy(hasPeed = true)
+                else -> newDog!!.copy(hasPooped = true)
             }
 
             currentState.copy(

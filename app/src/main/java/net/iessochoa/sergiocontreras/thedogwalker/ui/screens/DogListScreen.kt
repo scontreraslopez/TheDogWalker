@@ -18,19 +18,22 @@ import net.iessochoa.sergiocontreras.thedogwalker.ui.theme.TheDogWalkerTheme
 
 @Composable
 fun DogListScreen(
-    dogs: List<Dog>,
+    //dogs: List<Dog>,
     modifier: Modifier = Modifier,
-    viewModel: DogWalkerViewModel = viewModel()
+    viewModel: DogWalkerViewModel = viewModel(),
+    onDogClicked: (Dog) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val dogs = uiState.dogs
 
     LazyColumn(contentPadding = PaddingValues(16.dp), modifier = modifier) {
         items(dogs) { dog ->
-            DogCard(dog)
+            DogCard(dog, onDogClicked = onDogClicked)
         }
     }
 }
 
+/**
 @Preview(showBackground=true)
 @Composable
 private fun DogListScreenPreview() {
@@ -41,3 +44,4 @@ private fun DogListScreenPreview() {
         )
     }
 }
+ */

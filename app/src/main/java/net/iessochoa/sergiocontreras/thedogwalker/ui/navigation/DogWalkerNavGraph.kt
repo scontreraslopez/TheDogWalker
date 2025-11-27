@@ -3,7 +3,11 @@ package net.iessochoa.sergiocontreras.thedogwalker.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import net.iessochoa.sergiocontreras.thedogwalker.ui.DogWalkerViewModel
+import net.iessochoa.sergiocontreras.thedogwalker.ui.screens.DogDetailScreen
+import net.iessochoa.sergiocontreras.thedogwalker.ui.screens.DogListScreen
 
 
 @Composable
@@ -14,28 +18,28 @@ fun DogWalkerNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = RecipeListDestination.route, // 1. ¿Dónde empieza la app?
+        startDestination = DogListDestination.route, // 1. ¿Dónde empieza la app?
         modifier = modifier
     ) {
         // --- PANTALLA 1: LISTA ---
-        composable(route = RecipeListDestination.route) {
-            RecipeListScreen(
+        composable(route = DogListDestination.route) {
+            DogListScreen(
                 // Pasamos el ViewModel o el estado necesario
                 viewModel = viewModel,
                 // Evento de navegación: Al hacer click en una receta...
-                onRecipeClick = { recetaSeleccionada ->
+                onDogClicked = { selectedDog ->
                     // 1. Guardamos la selección en el ViewModel (Shared State)
-                    viewModel.onRecipeSelected(recetaSeleccionada)
+                    viewModel.onDogSelected(selectedDog)
 
                     // 2. Navegamos al detalle (sin pasar argumentos complejos, el VM ya sabe cuál es)
-                    navController.navigate(RecipeDetailDestination.route)
+                    navController.navigate(DogDetailDestination.route)
                 }
             )
         }
 
         // --- PANTALLA 2: DETALLE ---
-        composable(route = RecipeDetailDestination.route) {
-            RecipeDetailScreen(
+        composable(route = DogDetailDestination.route) {
+            DogDetailScreen(
                 // Al usar el MISMO viewModel, esta pantalla ya sabe qué receta se seleccionó
                 viewModel = viewModel,
                 // Evento para volver atrás

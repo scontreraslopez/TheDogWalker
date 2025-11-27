@@ -42,6 +42,12 @@ android {
 }
 
 dependencies {
+
+    val nav_version = "2.9.6"
+
+    // Jetpack Compose integration
+    implementation(libs.androidx.navigation.compose)
+
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // ViewModel utilities for Compose
