@@ -11,7 +11,7 @@ import net.iessochoa.sergiocontreras.thedogwalker.ui.screens.DogListScreen
 
 
 @Composable
-fun DogWalkerNavHost(
+fun Dog1WalkerNavHost(
     navController: NavHostController,
     viewModel: DogWalkerViewModel, // ViewModel compartido (tiene el estado de toda la app)
     modifier: Modifier = Modifier
